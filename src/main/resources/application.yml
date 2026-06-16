@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: StockNotificationApplication
+
+server:
+  port: ${PORT:8080}
+
+alphavantage:
+  api:
+    key: ${ALPHA_API_KEY}
+
+twilio:
+  accountSid: ${TWILIO_ACCOUNT_SID}
+  authToken: ${TWILIO_AUTH_TOKEN}
+  fromNumber: ${TWILIO_FROM}
+  toNumber: ${TWILIO_TO}
+
+
+
