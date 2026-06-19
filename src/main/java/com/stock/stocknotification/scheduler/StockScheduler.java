@@ -8,6 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Component
 public class StockScheduler {
 
@@ -21,16 +24,19 @@ public class StockScheduler {
         this.smsService = smsService;
     }
 
-    // Run every day 10pm UTC
-    // @Scheduled(cron = "0 42 22 * * ?", zone = "UTC")
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(cron = "0 0 10 * * MON,TUE,WED,THU,SUN", zone = "Asia/Kolkata")
     public void sendStockUpdate() {
         logger.info("Scheduler triggered at 10 PM UTC");
         try {
-            Stock stock = stockService.getStock("REDINGTON.BSE"); // you can change symbol
-            logger.info("Fetched stock data: {}", stock);
+            Stock stock = stockService.getStock("REDINGTON.BSE");
 
-            String message = "REDINGTON current price: " + stock.getPrice();
+            // Short date format: Fri 19-Jun
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd-MMM");
+            String formattedDate = now.format(formatter);
+
+            // Compact message
+            String message = "REDINGTON ₹" + stock.getPrice() + " (" + formattedDate + ")";
             logger.info("Preparing SMS message: {}", message);
 
             smsService.sendSms(message);
