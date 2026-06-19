@@ -19,6 +19,11 @@ public class StockController {
         this.stockService = stockService;
     }
 
+    @GetMapping("/")
+    public String health() {
+        return "Stock Notification Service is running!";
+    }
+
     @GetMapping("/stocks/{symbol}")
     public ResponseEntity<?> getStock(@PathVariable String symbol) {
         logger.info("Received request for stock: {}", symbol);
