@@ -24,7 +24,7 @@ public class StockScheduler {
         this.smsService = smsService;
     }
 
-    @Scheduled(cron = "0 0 10 * * MON,TUE,WED,THU,SUN", zone = "Asia/Kolkata")
+    @Scheduled(cron = "0 0 22 * * MON,TUE,WED,THU,FRI", zone = "Asia/Kolkata")
     public void sendStockUpdate() {
         logger.info("Scheduler triggered at 10 PM UTC");
         try {
