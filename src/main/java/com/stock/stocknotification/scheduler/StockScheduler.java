@@ -24,9 +24,9 @@ public class StockScheduler {
         this.smsService = smsService;
     }
 
-    @Scheduled(cron = "0 0 22 * * MON,TUE,WED,THU,FRI", zone = "Asia/Kolkata")
+    @Scheduled(cron = "0 30 13 * * MON,TUE,WED,THU,FRI")
     public void sendStockUpdate() {
-        logger.info("Scheduler triggered at 10 PM UTC");
+        logger.info("Scheduler triggered at 10 PM IST");
         try {
             Stock stock = stockService.getStock("REDINGTON.BSE");
 
