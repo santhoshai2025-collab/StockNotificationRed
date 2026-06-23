@@ -25,6 +25,7 @@ public class StockScheduler {
     }
 
     //@Scheduled(cron = "0 0 22 * * MON,TUE,WED,THU,FRI", zone = "Asia/Kolkata")
+    @Scheduled(fixedRate = 20000) // every 10 seconds
     public void sendStockUpdate() {
         logger.info("Scheduler triggered at 10 PM UTC");
         try {
